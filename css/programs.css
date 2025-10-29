@@ -1,0 +1,211 @@
+/* Programok oldal specifikus stílusok */
+
+/* Main content */
+.programs-main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    font-size: 16px;
+    text-align: center;
+}
+
+.programs-main h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #333;
+}
+
+.programs-main h2 {
+    margin: 25px 0 15px;
+    font-size: 22px;
+    color: #444;
+    text-align: center;
+}
+
+.programs-main h3 {
+    margin: 20px 0 10px;
+    font-size: 19px;
+    color: #555;
+    text-align: center;
+}
+
+.programs-main p {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.programs-main ul, .programs-main ol {
+    margin: 15px auto 20px;
+    padding-left: 10px;
+    text-align: left;
+    max-width: 600px;
+}
+
+.programs-main li {
+    margin-bottom: 8px;
+}
+
+.programs-main a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.programs-main a:hover {
+    text-decoration: underline;
+}
+
+/* Bevezető szöveg – kiemelt, vékonyabb szélességű */
+.intro-highlight {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    text-align: center;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Eutitmia leírás – pontosan úgy, mint a főoldalon */
+.eutitmia-description {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.eutitmia-highlight {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
+    font-style: italic;
+    font-weight: 500;
+    margin: 0 auto;
+    max-width: 660px;
+}
+
+/* Regisztrációs gombok – szürkék, mint a navigáció */
+.registration-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.reg-button {
+    padding: 12px 24px;
+    background-color: rgba(200, 200, 200, 0.7); /* Szürke, mint a nav gombok */
+    color: #333;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    min-width: 200px;
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.reg-button:hover {
+    transform: scale(1.1);
+    background-color: rgba(200, 200, 200, 0.9);
+}
+
+/* Program + Plakát konténer – szélesebb, mobilra responsive */
+.program-plakat-container {
+    display: flex;
+    gap: 30px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.program-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    background-color: #fafafa;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center; /* ez a "Program" címnek kell */
+}
+
+.program-card p {
+    text-align: left; /* ez a program sorokat balra igazítja */
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.program-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.plakat-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.plakat-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Workshop grid – ketté osztva */
+.workshops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin: 20px 0 40px;
+}
+
+.workshop {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* Mobil nézet optimalizálás */
+@media (max-width: 768px) {
+    .program-plakat-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .program-card, .plakat-item {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .workshops-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .registration-buttons {
+        width: 100%;
+    }
+    
+    .reg-button {
+        width: 100%;
+        min-width: auto;
+    }
+}

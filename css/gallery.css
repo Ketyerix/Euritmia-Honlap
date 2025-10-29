@@ -1,0 +1,155 @@
+/* Galéria szekció – Keret nélkül, full width, 3 soros, lapozható */
+.gallery-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.gallery-container {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+    min-height: 600px; /* 3 sor × 200px */
+}
+
+.gallery-wrapper {
+    display: grid;
+    grid-template-rows: repeat(3, 200px); /* Fix sor magasság */
+    grid-auto-columns: 250px;
+    grid-auto-flow: column;
+    gap: 10px;
+    transition: transform 0.5s ease;
+    width: max-content; /* Elég széles, hogy minden kép elférjen */
+    height: 100%;
+}
+
+.gallery-item {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background-color: #ddd;
+    display: block;
+    min-width: 0;
+    min-height: 0;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+/* Kép méretek – CSS Grid-alapú */
+.gallery-item.wide {
+    grid-row: span 1;
+    grid-column: span 2;
+}
+
+.gallery-item.tall {
+    grid-row: span 2;
+    grid-column: span 1;
+}
+
+.gallery-item.square {
+    grid-row: span 1;
+    grid-column: span 1;
+}
+
+/* Lapozó gombok – átlátszó, kör alakú, jobb/balra mutat */
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.3s;
+    color: white;
+    opacity: 0.7;
+    pointer-events: auto;
+}
+
+.gallery-arrow:hover {
+    background-color: rgba(255,255,255,0.4);
+    opacity: 1;
+}
+
+.gallery-prev {
+    left: 10px;
+}
+
+.gallery-next {
+    right: 10px;
+}
+
+/* Mobil optimalizálás - JAVÍTOTT */
+@media (max-width: 768px) {
+    .gallery-section {
+        padding: 0 10px;
+        margin: 20px auto;
+    }
+
+    .gallery-container {
+        min-height: auto;
+        overflow-x: auto; /* Vízszintes görgetés engedélyezése */
+        -webkit-overflow-scrolling: touch; /* Sima görgetés iOS-en */
+        padding-bottom: 10px; /* Hely a görgetősávnak */
+    }
+
+    .gallery-wrapper {
+        display: flex; /* Flexbox használata mobilon */
+        flex-direction: row; /* Vízszintes elrendezés */
+        grid-template-rows: none; /* Grid tulajdonságok törlése */
+        grid-auto-columns: auto;
+        grid-auto-flow: row;
+        gap: 8px;
+        height: auto;
+        width: auto;
+        transition: none; /* Animáció kikapcsolása mobilon */
+    }
+
+    .gallery-item {
+        flex: 0 0 auto; /* Ne nyújtózzon a flex elem */
+        width: 280px; /* Fix szélesség mobilon */
+        height: 200px; /* Fix magasság mobilon */
+    }
+
+    /* Méret osztályok felülírása mobilon */
+    .gallery-item.wide,
+    .gallery-item.tall,
+    .gallery-item.square {
+        width: 280px;
+        height: 200px;
+    }
+
+    /* Lapozó gombok elrejtése mobilon - görgetéssel helyettesítve */
+    .gallery-arrow {
+        display: none;
+    }
+}
+
+/* Extra kis képernyőkre */
+@media (max-width: 480px) {
+    .gallery-item {
+        width: 250px;
+        height: 180px;
+    }
+
+    .gallery-item.wide,
+    .gallery-item.tall,
+    .gallery-item.square {
+        width: 250px;
+        height: 180px;
+    }
+}

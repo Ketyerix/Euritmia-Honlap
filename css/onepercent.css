@@ -1,0 +1,226 @@
+/* 1% oldal specifikus stílusok */
+
+/* Main content */
+.onepercent-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.content-row {
+    display: flex;
+    gap: 40px;
+}
+
+.card {
+    flex: 1;
+    padding: 25px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin: 0 0 15px;
+    color: #333;
+}
+
+.card p {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #333;
+}
+
+.thank-you {
+    text-align: center;
+    margin: 40px 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.report-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 6px 0;
+    text-align: center;
+    display: block;
+}
+
+.report-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.note {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.report-note {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.report-text {
+    text-align: center;
+    margin-top: 30px;
+    padding: 25px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    line-height: 1.8;
+    font-size: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.report-text h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.report-text strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Közhasznúsági jelentések szekció - JAVÍTOTT */
+.reports-section {
+    text-align: center;
+    margin: 30px auto;
+    width: 100%;
+}
+
+.reports-section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 100%;
+    margin: 20px auto;
+    justify-items: center;
+    align-items: start;
+}
+
+/* Tablet nézet (1024px és kisebb) */
+@media (max-width: 1024px) {
+    .reports-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+}
+
+/* Mobil nézet (768px és kisebb) */
+@media (max-width: 768px) {
+    .reports-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .reports-section h2 {
+        font-size: 20px;
+    }
+}
+
+/* Kismobil nézet (480px és kisebb) */
+@media (max-width: 480px) {
+    .reports-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .report-link {
+        font-size: 14px;
+        padding: 8px 5px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+    
+    .report-link:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+        transform: translateY(-2px);
+    }
+}
+
+/* Extra kismobil nézet (360px és kisebb) */
+@media (max-width: 360px) {
+    .reports-grid {
+        grid-template-columns: repeat(2, 1fr); /* Fix 2 oszlop */
+        gap: 6px;
+    }
+    
+    .report-link {
+        font-size: 13px;
+        padding: 6px 4px;
+    }
+}
+
+/* Alternatív megoldás - flexbox használata nagyon kis képernyőkön */
+@media (max-width: 320px) {
+    .reports-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .report-link {
+        text-align: center;
+        padding: 8px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 6px;
+    }
+}
+
+/* Mobil nézet optimalizálás az egész oldalra */
+@media (max-width: 768px) {
+    .onepercent-content {
+        padding: 0 15px;
+        gap: 30px;
+    }
+    
+    .content-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .card {
+        width: 100%;
+    }
+    
+    .page-title {
+        font-size: 24px;
+    }
+    
+    .report-text {
+        padding: 15px;
+        font-size: 14px;
+    }
+}

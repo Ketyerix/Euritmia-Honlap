@@ -4,244 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Képzések – Euritmia Mozgásművészeti Társaság</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-        background-image: url('Hatter.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        }
-
-        /* Static header */
-        .static-header {
-            text-align: center;
-            padding: 40px 0 20px;
-            background-color: transparent;
-            transition: opacity 0.3s ease;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .header-logo {
-            width: 60px;
-            height: auto;
-            display: block;
-        }
-
-        .header-text {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #333;
-            line-height: 1.2;
-        }
-
-        .static-nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            padding: 15px 0;
-        }
-
-        .nav-button {
-            padding: 12px 24px;
-            background-color: rgba(200, 200, 200, 0.7);
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            min-width: 110px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            font-size: 16px;
-        }
-
-        .nav-button:hover {
-            transform: scale(1.1);
-            background-color: rgba(200, 200, 200, 0.9);
-        }
-
-        .nav-button.active {
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        /* Sticky nav */
-        .sticky-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 12px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            transition: all 0.3s ease;
-            background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-100%);
-        }
-
-        .sticky-nav.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        /* Main content */
-        .main-content {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Training images */
-        .training-images {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .training-image {
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .training-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Teachers section – now simple vertical list */
-        .teachers-section {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .teachers-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .teacher-item {
-            margin-bottom: 25px;
-            padding: 20px;
-            background-color: #fafafa;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            display: inline-block;
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .teacher-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .teacher-education {
-            font-style: italic;
-            color: #666;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: #f8f8f8;
-            margin-top: 50px;
-            border-top: 1px solid #ddd;
-        }
-
-        .contact-info {
-            display: inline-block;
-            text-align: center;
-        }
-
-        .contact-info p {
-            margin: 5px 0;
-            font-size: 16px;
-            line-height: 1.4;
-        }
-
-        .address-link,
-        .phone-link,
-        .email-link {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .address-link:hover,
-        .phone-link:hover,
-        .email-link:hover {
-            color: #007bff;
-            text-decoration: underline;
-        }
-
-        .social-icons {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-icon {
-            width: 32px;
-            height: 32px;
-            transition: transform 0.2s;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.2);
-        }
-    </style>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/trainings.css">
 </head>
 <body>
     <!-- Static Header -->
     <div class="static-header" id="staticHeader">
         <div class="header-content">
-            <img src="euritmia-logo.png" alt="Euritmia Logo" class="header-logo">
+            <img src="images/euritmia-logo.png" alt="Euritmia Logo" class="header-logo">
             <span class="header-text">MAGYAR EURITMIA – MOZGÁSMŰVÉSZETI TÁRSASÁG</span>
         </div>
         <nav class="static-nav">
-        <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
-        <button class="nav-button" data-page="programs" onclick="window.location.href='programok.html'">Programok</button>
-        <button class="nav-button active" data-page="trainings" onclick="scrollToTop()">Képzések</button>
-        <button class="nav-button" data-page="onepercent" onclick="window.location.href='egyszazalek.html'">1%</button>
+            <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
+            <button class="nav-button" data-page="programs" onclick="window.location.href='programok.html'">Programok</button>
+            <button class="nav-button active" data-page="trainings" onclick="scrollToTop()">Képzések</button>
+            <button class="nav-button" data-page="onepercent" onclick="window.location.href='egyszazalek.html'">1%</button>
         </nav>
     </div>
 
@@ -254,14 +35,14 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="main-content trainings-content">
         <!-- Training images -->
         <div class="training-images">
             <div class="training-image">
-                <img src="alapozo.jpg" alt="Euritmia képzés">
+                <img src="images/alapozo.jpg" alt="Euritmia képzés">
             </div>
             <div class="training-image">
-                <img src="szilmarilok.jpg" alt="Euritmia képzés 2">
+                <img src="images/szilmarilok.jpg" alt="Euritmia képzés 2">
             </div>
         </div>
 
@@ -314,55 +95,12 @@
         </div>
     </footer>
 
+    <script src="js/script.js"></script>
     <script>
-        function setActiveButton(page) {
-            const staticButtons = document.querySelectorAll('.static-nav .nav-button');
-            const stickyButtons = document.querySelectorAll('.sticky-nav .nav-button');
-
-            staticButtons.forEach(btn => btn.classList.remove('active'));
-            stickyButtons.forEach(btn => btn.classList.remove('active'));
-
-            staticButtons.forEach(btn => {
-                if (btn.dataset.page === page) btn.classList.add('active');
-            });
-            stickyButtons.forEach(btn => {
-                if (btn.dataset.page === page) btn.classList.add('active');
-            });
-        }
-
-        document.querySelectorAll('.nav-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const page = button.dataset.page;
-                setActiveButton(page);
-            });
+        // Képzések oldal specifikus JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveButton('trainings');
         });
-
-        setActiveButton('trainings');
-
-        const staticHeader = document.getElementById('staticHeader');
-        const stickyNav = document.getElementById('stickyNav');
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > 50) {
-                stickyNav.classList.add('visible');
-                staticHeader.style.opacity = '0';
-                staticHeader.style.pointerEvents = 'none';
-            } else {
-                stickyNav.classList.remove('visible');
-                staticHeader.style.opacity = '1';
-                staticHeader.style.pointerEvents = 'auto';
-            }
-        });
-
-        function scrollToTop() {
-        window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // sima görgetés (opcionális)
-        });
-        setActiveButton('trainings'); // ha szükséges, frissítsd az aktív gombot
-}
     </script>
 </body>
 </html>

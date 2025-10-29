@@ -1,0 +1,52 @@
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%);
+    backdrop-filter: blur(10px);
+    margin-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+
+.contact-info {
+    display: inline-block;
+    text-align: center;
+}
+
+.contact-info p {
+    margin: 5px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.address-link,
+.phone-link,
+.email-link {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.address-link:hover,
+.phone-link:hover,
+.email-link:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.social-icons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}

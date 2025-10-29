@@ -4,360 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programok – Euritmia Mozgásművészeti Társaság</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-        background-image: url('Hatter.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        }
-
-        /* Static header */
-        .static-header {
-            text-align: center;
-            padding: 40px 0 20px;
-            background-color: transparent;
-            transition: opacity 0.3s ease;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .header-logo {
-            width: 60px;
-            height: auto;
-            display: block;
-        }
-
-        .header-text {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #333;
-            line-height: 1.2;
-        }
-
-        .static-nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            padding: 15px 0;
-        }
-
-        .nav-button {
-            padding: 12px 24px;
-            background-color: rgba(200, 200, 200, 0.7);
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            min-width: 110px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            font-size: 16px;
-        }
-
-        .nav-button:hover {
-            transform: scale(1.1);
-            background-color: rgba(200, 200, 200, 0.9);
-        }
-
-        .nav-button.active {
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        /* Sticky nav */
-        .sticky-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 12px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            transition: all 0.3s ease;
-            background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-100%);
-        }
-
-        .sticky-nav.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        /* Main content */
-        main {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 28px;
-            color: #333;
-        }
-
-        h2 {
-            margin: 25px 0 15px;
-            font-size: 22px;
-            color: #444;
-            text-align: center;
-        }
-
-        h3 {
-            margin: 20px 0 10px;
-            font-size: 19px;
-            color: #555;
-            text-align: center;
-        }
-
-        p {
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        ul, ol {
-            margin: 15px auto 20px;
-            padding-left: 10px;
-            text-align: left;
-            max-width: 600px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Bevezető szöveg – kiemelt, vékonyabb szélességű */
-        .intro-highlight {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 25px;
-            background-color: #fafafa;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            text-align: center;
-            font-style: italic;
-            font-size: 17px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        /* Eutitmia leírás – pontosan úgy, mint a főoldalon */
-        .eutitmia-description {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .eutitmia-highlight {
-            font-size: 20px;
-            line-height: 1.6;
-            color: #333;
-            font-style: italic;
-            font-weight: 500;
-            margin: 0 auto;
-            max-width: 660px;
-        }
-
-        /* Regisztrációs gombok – szürkék, mint a navigáció */
-        .registration-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-            margin: 25px 0;
-        }
-
-        .reg-button {
-            padding: 12px 24px;
-            background-color: rgba(200, 200, 200, 0.7); /* Szürke, mint a nav gombok */
-            color: #333;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            min-width: 200px;
-            text-align: center;
-            font-size: 16px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .reg-button:hover {
-            transform: scale(1.1);
-            background-color: rgba(200, 200, 200, 0.9);
-        }
-
-        /* Program + Plakát konténer – szélesebb, mobilra responsive */
-        .program-plakat-container {
-            display: flex;
-            gap: 30px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .program-card {
-        flex: 1;
-        min-width: 300px;
-        max-width: 500px;
-        background-color: #fafafa;
-        padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        text-align: center; /* ez a "Program" címnek kell */
-    }
-
-    .program-card p {
-        text-align: left; /* ez a program sorokat balra igazítja */
-        margin: 8px 0;
-        line-height: 1.5;
-}
-
-        .program-card h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 20px;
-            color: #333;
-            text-align: center;
-        }
-
-        .program-card p {
-            margin: 8px 0;
-            line-height: 1.5;
-        }
-
-        .plakat-item {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .plakat-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Workshop grid – ketté osztva */
-        .workshops-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 20px 0 40px;
-        }
-
-        .workshop {
-            background-color: #fafafa;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: #f8f8f8;
-            margin-top: 50px;
-            border-top: 1px solid #ddd;
-        }
-
-        .contact-info {
-            display: inline-block;
-            text-align: center;
-        }
-
-        .contact-info p {
-            margin: 5px 0;
-            font-size: 16px;
-            line-height: 1.4;
-        }
-
-        .address-link,
-        .phone-link,
-        .email-link {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .address-link:hover,
-        .phone-link:hover,
-        .email-link:hover {
-            color: #007bff;
-            text-decoration: underline;
-        }
-
-        .social-icons {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-icon {
-            width: 32px;
-            height: 32px;
-            transition: transform 0.2s;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.2);
-        }
-    </style>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/programs.css">
 </head>
 <body>
     <!-- Static Header -->
     <div class="static-header" id="staticHeader">
         <div class="header-content">
-            <img src="euritmia-logo.png" alt="Euritmia Logo" class="header-logo">
+            <img src="images/euritmia-logo.png" alt="Euritmia Logo" class="header-logo">
             <span class="header-text">MAGYAR EURITMIA – MOZGÁSMŰVÉSZETI TÁRSASÁG</span>
         </div>
         <nav class="static-nav">
             <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
-            <button class="nav-button" data-page="programs" onclick="scrollToTop()">Programok</button>
+            <button class="nav-button active" data-page="programs" onclick="scrollToTop()">Programok</button>
             <button class="nav-button" data-page="trainings" onclick="window.location.href='kepzesek.html'">Képzések</button>
             <button class="nav-button" data-page="onepercent" onclick="window.location.href='egyszazalek.html'">1%</button>
         </nav>
@@ -366,95 +29,95 @@
     <!-- Sticky Nav -->
     <nav class="sticky-nav" id="stickyNav">
         <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
-        <button class="nav-button" data-page="programs" onclick="scrollToTop()">Programok</button>
+        <button class="nav-button active" data-page="programs" onclick="scrollToTop()">Programok</button>
         <button class="nav-button" data-page="trainings" onclick="window.location.href='kepzesek.html'">Képzések</button>
         <button class="nav-button" data-page="onepercent" onclick="window.location.href='egyszazalek.html'">1%</button>
     </nav>
 
     <!-- Fő tartalom -->
- <main>
-    <h1>AZ EURITMIA ÜNNEPE</h1>
+    <main class="programs-main">
+        <h1>AZ EURITMIA ÜNNEPE</h1>
 
-    <!-- Kiemelt szöveg – pontosan úgy, mint a főoldalon -->
-    <section class="eutitmia-description">
-        <p class="eutitmia-highlight">
-            Az euritmia az egész test mozgásával, a tér és idő világában teszi láthatóvá a hangzó beszédet vagy a zenét. Ha az ember az egész testével beszél és énekel, a szó, a zene újra tetté, teremtő erővé válik.
-        </p>
-    </section>
+        <!-- Kiemelt szöveg – pontosan úgy, mint a főoldalon -->
+        <section class="eutitmia-description">
+            <p class="eutitmia-highlight">
+                Az euritmia az egész test mozgásával, a tér és idő világában teszi láthatóvá a hangzó beszédet vagy a zenét. Ha az ember az egész testével beszél és énekel, a szó, a zene újra tetté, teremtő erővé válik.
+            </p>
+        </section>
 
-    <!-- Program + Plakát kétoszlopos, szélesebb, mobilra responsive -->
-    <div class="program-plakat-container">
-        <div class="program-card">
-            <h3>Program</h3>
-            <p><strong>9:30–9:45</strong> – érkezés</p>
-            <p><strong>9:45–10:00</strong> – napindító közös euritmia</p>
-            <p><strong>10:00–11:00</strong> – 1. workshop 4 csoportban</p>
-            <p><strong>11:00–11:15</strong> – szünet</p>
-            <p><strong>11:15–12:00</strong> – 2. workshop új csoportban</p>
-            <p><strong>12:00–13:00</strong> – ebéd</p>
-            <p><strong>13:00–13:45</strong> – 3. workshop – felkészülés a közös részre</p>
-            <p><strong>13:45–14:15</strong> – szünet</p>
-            <p><strong>14:15–15:00</strong> – közös euritmia az új csarnokban</p>
-            <p><strong>15:00–15:30</strong> – kávészünet</p>
-            <p><strong>15:30–16:15</strong> – Sósné Pintye Mária előadása</p>
-            <p><strong>16:15–16:30</strong> – szünet</p>
-            <p><strong>16:30–17:30</strong> – Harmath Judit workshopja</p>
-            <p><strong>18:00–20:00</strong> – Artemisz Euritmia Színpad előadása</p>
+        <!-- Program + Plakát kétoszlopos, szélesebb, mobilra responsive -->
+        <div class="program-plakat-container">
+            <div class="program-card">
+                <h3>Program</h3>
+                <p><strong>9:30–9:45</strong> – érkezés</p>
+                <p><strong>9:45–10:00</strong> – napindító közös euritmia</p>
+                <p><strong>10:00–11:00</strong> – 1. workshop 4 csoportban</p>
+                <p><strong>11:00–11:15</strong> – szünet</p>
+                <p><strong>11:15–12:00</strong> – 2. workshop új csoportban</p>
+                <p><strong>12:00–13:00</strong> – ebéd</p>
+                <p><strong>13:00–13:45</strong> – 3. workshop – felkészülés a közös részre</p>
+                <p><strong>13:45–14:15</strong> – szünet</p>
+                <p><strong>14:15–15:00</strong> – közös euritmia az új csarnokban</p>
+                <p><strong>15:00–15:30</strong> – kávészünet</p>
+                <p><strong>15:30–16:15</strong> – Sósné Pintye Mária előadása</p>
+                <p><strong>16:15–16:30</strong> – szünet</p>
+                <p><strong>16:30–17:30</strong> – Harmath Judit workshopja</p>
+                <p><strong>18:00–20:00</strong> – Artemisz Euritmia Színpad előadása</p>
+            </div>
+
+            <div class="plakat-item">
+                <img src="images/EuritmiaUnnepe.jpg" alt="Az Euritmia Ünnepe plakát" />
+            </div>
         </div>
 
-        <div class="plakat-item">
-            <img src="EuritmiaUnnepe.jpg" alt="Az Euritmia Ünnepe plakát" />
-        </div>
-    </div>
-
-    <h2>Itt tudtok jelentkezni:</h2>
-    <div class="registration-buttons">
-        <a href="https://tixa.hu/euritmia-teljes-program-20241005" target="_blank" class="reg-button">Egész napos program (12.000 Ft)</a>
-        <a href="https://tixa.hu/euritmia-esti-program-20241005" target="_blank" class="reg-button">Esti előadás (5.000 Ft)</a>
-    </div>
-
-    <h2>A WORKSHOPOK TÉMÁI:</h2>
-
-    <div class="workshops-grid">
-        <div class="workshop">
-            <h3>Ritmusok az euritmiában</h3>
-            <p><em>Műhelymunka Cserháti Kati vezetésével</em></p>
-            <p>Ahogy a világegyetemet ritmusok mozgatják, járják át, úgy az ember lényét is ritmusok veszik körül, szövik át, éltetik. A makro- és mikrokozmikus ritmusok egymásba fonódnak, összekapcsolódnak. Az eu-ritmia (görögül: jó ritmus) világában a ritmusok központi szerepet játszanak. A rövid-hosszú polaritásából indulunk el, átéljük az ezekből felépülő két alap versláb (jambus-trocheus) minőségeit, különbözőségét, hatását eljutva összetettebb ritmusokig euritmiai mozdulatok, formák, euritmiagolyók, rudak segítségével.</p>
+        <h2>Itt tudtok jelentkezni:</h2>
+        <div class="registration-buttons">
+            <a href="https://tixa.hu/euritmia-teljes-program-20241005" target="_blank" class="reg-button">Egész napos program (12.000 Ft)</a>
+            <a href="https://tixa.hu/euritmia-esti-program-20241005" target="_blank" class="reg-button">Esti előadás (5.000 Ft)</a>
         </div>
 
-        <div class="workshop">
-            <h3>A színek</h3>
-            <p><em>Műhelymunka Kálmán Zsófia és Polgár Zsuzsa vezetésével</em></p>
-            <p>Néhány ráhangoló gyakorlat után megismerkedünk a színek euritmiai megjelenítésével. Közösen és kis csoportokban dolgozunk majd. A mozdulatok segítségével mélyen átélhetik a résztvevők a színek világát.</p>
-        </div>
+        <h2>A WORKSHOPOK TÉMÁI:</h2>
 
-        <div class="workshop">
-            <h3>Zeneeuritmia</h3>
-            <p><em>Műhelymunka Balogh Orsolya vezetésével</em></p>
-            <p>A felépítő és magunkat egyensúlyba hozó euritmiai gyakorlatokon kívül, melyeket élőzenére végzünk, megismerkedünk a zene alapelemeivel, és azokat testben, a térben közösen átélve megtapasztaljuk a zenei euritmia jótékony, harmonizáló hatását.</p>
-        </div>
+        <div class="workshops-grid">
+            <div class="workshop">
+                <h3>Ritmusok az euritmiában</h3>
+                <p><em>Műhelymunka Cserháti Kati vezetésével</em></p>
+                <p>Ahogy a világegyetemet ritmusok mozgatják, járják át, úgy az ember lényét is ritmusok veszik körül, szövik át, éltetik. A makro- és mikrokozmikus ritmusok egymásba fonódnak, összekapcsolódnak. Az eu-ritmia (görögül: jó ritmus) világában a ritmusok központi szerepet játszanak. A rövid-hosszú polaritásából indulunk el, átéljük az ezekből felépülő két alap versláb (jambus-trocheus) minőségeit, különbözőségét, hatását eljutva összetettebb ritmusokig euritmiai mozdulatok, formák, euritmiagolyók, rudak segítségével.</p>
+            </div>
 
-        <div class="workshop">
-            <h3>Köztes tér – „Mi hat közöttünk?”</h3>
-            <p><em>Szociális euritmia Czakó Anikóval</em></p>
-            <p>Miként változik a közöttünk áramló tér, ha együtt euritmiázunk? 
-            A műhelymunka során megtapasztalhatjuk a „köztes tér” plasztikáját ember és ember, ember és a finomabb terek lényei között, mindezt a költészet és a zene segítségével.</p>
-        </div>
+            <div class="workshop">
+                <h3>A színek</h3>
+                <p><em>Műhelymunka Kálmán Zsófia és Polgár Zsuzsa vezetésével</em></p>
+                <p>Néhány ráhangoló gyakorlat után megismerkedünk a színek euritmiai megjelenítésével. Közösen és kis csoportokban dolgozunk majd. A mozdulatok segítségével mélyen átélhetik a résztvevők a színek világát.</p>
+            </div>
 
-        <div class="workshop">
-            <h3>Teremtő erő</h3>
-            <p><em>Műhelymunka Harmath Judit vezetésével</em></p>
-            <p>Az euritmia, mint egyéni és közösségi megismerési út. 
-            A csoportos mozgás, teremtő erő. A mozdulat, mint ima.</p>
-        </div>
+            <div class="workshop">
+                <h3>Zeneeuritmia</h3>
+                <p><em>Műhelymunka Balogh Orsolya vezetésével</em></p>
+                <p>A felépítő és magunkat egyensúlyba hozó euritmiai gyakorlatokon kívül, melyeket élőzenére végzünk, megismerkedünk a zene alapelemeivel, és azokat testben, a térben közösen átélve megtapasztaljuk a zenei euritmia jótékony, harmonizáló hatását.</p>
+            </div>
 
-        <div class="workshop">
-            <h3>Sósné Pintye Mária előadása</h3>
-            <p><em>Bio karate? Waldorf-jóga? Jogosítvány-előkészítő?</em><br>
-            Az euritmia hatása a testre, a lélekre és a szellemre</p>
+            <div class="workshop">
+                <h3>Köztes tér – „Mi hat közöttünk?”</h3>
+                <p><em>Szociális euritmia Czakó Anikóval</em></p>
+                <p>Miként változik a közöttünk áramló tér, ha együtt euritmiázunk? 
+                A műhelymunka során megtapasztalhatjuk a „köztes tér” plasztikáját ember és ember, ember és a finomabb terek lényei között, mindezt a költészet és a zene segítségével.</p>
+            </div>
+
+            <div class="workshop">
+                <h3>Teremtő erő</h3>
+                <p><em>Műhelymunka Harmath Judit vezetésével</em></p>
+                <p>Az euritmia, mint egyéni és közösségi megismerési út. 
+                A csoportos mozgás, teremtő erő. A mozdulat, mint ima.</p>
+            </div>
+
+            <div class="workshop">
+                <h3>Sósné Pintye Mária előadása</h3>
+                <p><em>Bio karate? Waldorf-jóga? Jogosítvány-előkészítő?</em><br>
+                Az euritmia hatása a testre, a lélekre és a szellemre</p>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -475,46 +138,12 @@
         </div>
     </footer>
 
+    <script src="js/script.js"></script>
     <script>
-        function setActiveButton(page) {
-            const staticButtons = document.querySelectorAll('.static-nav .nav-button');
-            const stickyButtons = document.querySelectorAll('.sticky-nav .nav-button');
-
-            staticButtons.forEach(btn => btn.classList.remove('active'));
-            stickyButtons.forEach(btn => btn.classList.remove('active'));
-
-            staticButtons.forEach(btn => {
-                if (btn.dataset.page === page) btn.classList.add('active');
-            });
-            stickyButtons.forEach(btn => {
-                if (btn.dataset.page === page) btn.classList.add('active');
-            });
-        }
-
-        setActiveButton('programs');
-
-        const staticHeader = document.getElementById('staticHeader');
-        const stickyNav = document.getElementById('stickyNav');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 50) {
-                stickyNav.classList.add('visible');
-                staticHeader.style.opacity = '0';
-                staticHeader.style.pointerEvents = 'none';
-            } else {
-                stickyNav.classList.remove('visible');
-                staticHeader.style.opacity = '1';
-                staticHeader.style.pointerEvents = 'auto';
-            }
+        // Programok oldal specifikus JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveButton('programs');
         });
-
-        function scrollToTop() {
-        window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // sima görgetés (opcionális)
-        });
-        setActiveButton('programs'); // ha szükséges, frissítsd az aktív gombot
-        }
     </script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100vh;
+}
+
+body {
+    background-image: url('../images/Hatter.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: auto; /* JavaScript fogja felülírni */
+    min-height: 100vh;
+}
+
+.main-content {
+    min-height: calc(100vh - 200px);
+    position: relative;
+}
