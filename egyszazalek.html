@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1% – Euritmia Mozgásművészeti Társaság</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+        background-image: url('Hatter.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        }
+
+        /* Static header – visible only before scroll */
+        .static-header {
+            text-align: center;
+            padding: 40px 0 20px;
+            background-color: transparent;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header-logo {
+            width: 60px;
+            height: auto;
+            display: block;
+        }
+
+        .header-text {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .static-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 15px 0;
+        }
+
+        .nav-button {
+            padding: 12px 24px;
+            background-color: rgba(200, 200, 200, 0.7);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            min-width: 110px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            font-size: 16px;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(200, 200, 200, 0.9);
+        }
+
+        .nav-button.active {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Sticky nav – appears only on scroll */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 12px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
+            background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-100%);
+        }
+
+        .sticky-nav.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* Main content */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .content-row {
+            display: flex;
+            gap: 40px;
+        }
+
+        .card {
+            flex: 1;
+            padding: 25px;
+            background-color: #fafafa;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 25px 0 15px;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .thank-you {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .report-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 6px 0;
+            text-align: center;
+            display: block;
+        }
+
+        .report-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .report-text {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #fafafa;
+            border-radius: 10px;
+            line-height: 1.8;
+            font-size: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .report-text h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .report-text strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #f8f8f8;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+
+        .contact-info {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .address-link,
+        .phone-link,
+        .email-link {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .address-link:hover,
+        .phone-link:hover,
+        .email-link:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.2s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Static Header -->
+    <div class="static-header" id="staticHeader">
+        <div class="header-content">
+            <img src="euritmia-logo.png" alt="Euritmia Logo" class="header-logo">
+            <span class="header-text">MAGYAR EURITMIA – MOZGÁSMŰVÉSZETI TÁRSASÁG</span>
+        </div>
+        <nav class="static-nav">
+        <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
+        <button class="nav-button" data-page="programs" onclick="window.location.href='programok.html'">Programok</button>
+        <button class="nav-button" data-page="trainings" onclick="window.location.href='kepzesek.html'">Képzések</button>
+        <button class="nav-button" data-page="onepercent" onclick="scrollToTop()">1%</button>
+        </nav>
+    </div>
+
+    <!-- Sticky Nav -->
+    <nav class="sticky-nav" id="stickyNav">
+        <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
+        <button class="nav-button" data-page="programs" onclick="window.location.href='programok.html'">Programok</button>
+        <button class="nav-button" data-page="trainings" onclick="window.location.href='kepzesek.html'">Képzések</button>
+        <button class="nav-button" data-page="onepercent" onclick="scrollToTop()">1%</button>
+    </nav>
+
+    <div class="main-content">
+        <!-- Középre igazított cím -->
+        <h1 class="page-title">Rendelkezés az 1%-ról</h1>
+
+        <!-- Rendelkezés és Tudnivalók egy szinten, kártyákban -->
+        <div class="content-row">
+            <div class="card">
+                <h2>RENDELKEZŐ NYILATKOZAT</h2>
+
+                <p><strong>A BEFIZETETT ADÓ EGY SZÁZALÉKÁRÓL</strong></p>
+
+                <p>A kedvezményezett adószáma:<br>
+                <span class="highlight">18088548-1-42</span></p>
+
+                <p>A kedvezményezett neve:<br>
+                <span class="highlight">Magyar Euritmia – Mozgásművészeti Társaság</span></p>
+
+                <p>Bankszámlaszám:<br>
+                <span class="highlight">CIB bank: 10700079-27451007-51100005</span></p>
+            </div>
+
+            <div class="card">
+                <h2>TUDNIVALÓK</h2>
+                <p>Ezt a nyilatkozatot csak akkor töltse ki, ha valamely társadalmi szervezet, alapítvány vagy külön nevesített intézmény, elkülönített alap javára kíván rendelkezni.</p>
+
+                <p>A nyilatkozatot tegye egy olyan postai szabvány méretű borítékba, amely e lap méretét csak annyiban haladja meg, hogy abba a nyilatkozat elhelyezhető legyen.</p>
+
+                <h2>FONTOS!</h2>
+                <p>A rendelkezése csak akkor érvényes és teljesíthető, ha a nyilatkozaton a kedvezményezett adószámát, a borítékon pedig az ÖN NEVÉT, LAKCÍMÉT ÉS AZ ADÓAZONOSÍTÓ JELÉT pontosan tünteti fel.</p>
+            </div>
+        </div>
+
+        <!-- Köszönet középre igazítva -->
+        <div class="thank-you">
+            Köszönjük, ha adója 1%-val Társaságunkat támogatja!
+        </div>
+
+        <!-- 2021-es beszámoló linkje -->
+        <p style="text-align: center; font-size: 14px; color: #666;">
+            A 2021-es személyi jövedelemadó rendelkezés szerinti 1%-ból befolyó támogatások felhasználásáról szóló beszámoló 
+            <a href="https://drive.google.com/file/d/1fu0N6c4SsnXgNHwb4w3lyI0D-wBidJMu/view" class="report-link" style="font-weight: normal; display: inline;">itt található</a>.
+        </p>
+
+        <!-- Közhasznúsági jelentések – dinamikus, 3 oszlop, háttér nélkül -->
+        <div style="text-align: center; margin: 30px auto;">
+            <h2>Közhasznúsági jelentések:</h2>
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+                max-width: 800px;
+                margin: 20px auto;
+                justify-items: center;
+            ">
+                <a href="#" class="report-link">2024-es jelentés</a>
+                <a href="#" class="report-link">2023-as jelentés</a>
+                <a href="#" class="report-link">2022-es jelentés</a>
+                <a href="#" class="report-link">2021-es jelentés</a>
+                <a href="#" class="report-link">2020-as jelentés</a>
+                <a href="#" class="report-link">2019-es jelentés</a>
+                <a href="#" class="report-link">2018-as jelentés</a>
+                <a href="#" class="report-link">2017-es jelentés</a>
+                <a href="#" class="report-link">2016-os jelentés</a>
+                <a href="#" class="report-link">2015-ös jelentés</a>
+                <a href="#" class="report-link">2014-es jelentés</a>
+                <a href="#" class="report-link">2013-as jelentés</a>
+                <a href="#" class="report-link">2012-es jelentés</a>
+                <a href="#" class="report-link">2011-es jelentés</a>
+                <a href="#" class="report-link">2010-es jelentés</a>
+                <a href="#" class="report-link">2009-es jelentés</a>
+                <a href="#" class="report-link">2008-as jelentés</a>
+                <a href="#" class="report-link">2007-es jelentés</a>
+            </div>
+            <p class="note">A jelentések PDF formátumban letölthetők. Ha valamelyik évhez nem talál linket, kérjük, lépjen kapcsolatba velünk!</p>
+        </div>
+
+        <!-- 2018-as beszámoló szöveg középre igazítva -->
+        <div class="report-text">
+            <h3>Magyar Euritmia-Mozgásművészeti Társaság</h3>
+            <strong>Képviselő: Mihálcz Dóra</strong>
+            <strong>2018 Nonprofit beszámoló a közhasznú tevékenységeinkről</strong>
+
+            <p><strong>Egészségmegőrzés, gyógyító, eü. rehab. tevékenység</strong><br>
+            A 2018-as évben is tovább folytatódtak a felnőtt euritmia csoportok rendszeres foglalkozásai. Mindhárom csoportunkban kimondottan a saját élményű átélés, egészségmegőrzés volt a cél. A végzett euritmisták számára terápiás euritmia-továbbképzéseket szerveztünk. Társaságunk tagjai különböző intézményekben rendszeres egészségmegőrző euritmia foglalkozásokat tartottak.</p>
+
+            <p>A különböző életterületeken dolgozók megtapasztalhatták az euritmia-foglalkozások harmonizáló, egészségmegőrző, frissítő hatását. Az euritmisták egy csoportja továbbképzések keretében folytathatta a terápiás euritmia gyakorlatainak és elméletének megismerését.</p>
+
+            <p><strong>Nevelés, oktatás, képességfejlesztés, ismeretterjesztés</strong><br>
+            Az Egyesületünk által működtetett képzés tagja a Nemzetközi Euritmia Szövetségnek, és jogosult a Szövetség euritmia-tanárképzési programja szerinti oktatást budapesti helyszínen megszervezni. 2018-ban egy ötödéves és két másodéves csoporttal dolgoztunk. Rendszeresen szerveztünk pedagógiai és művészeti továbbképzéseket a már végzett euritmisták számára. Társaságunk tagjai rendszeresen tartottak ismeretterjesztő, bemutató előadásokat és euritmiaórákat a Waldorf iskolák szülői közösségeinek és a gyerekeknek, rendszeres, valamint szakkör jellegű euritmia foglalkozásokat és bemutatókat szerveztek az iskolás korosztály számára.</p>
+
+            <p>A Társaságunk által megszervezett képzés lehetővé teszi, hogy a Waldorf iskolákban kötelezően oktatott euritmiát megfelelő képesítéssel rendelkező tanárok oktathassák. A tanárok által az euritmia több száz gyermekhez eljut, segítve ezáltal az egészséges fejlődésüket. Az ismeretterjesztő, bemutató euritmiaórákon a szülők, és más érdeklődő felnőttek megismerhetik, gyakorolhatják az euritmiát, saját élményű tapasztalatot szerezve az euritmia jótékony, képességfejlesztő hatásairól.</p>
+
+            <p><strong>Kulturális tevékenységek</strong><br>
+            2018-ban Társaságunk újabb nyilvános, színházi előadásokat szervezett. Az Artemisz Euritmiaszínpad matinéelőadást tartott a Kispesti Waldorf Iskola diákjainak. A produkciót két grazi Waldorf iskola is vendégszereplésre hívta, ahol többszáz gyermek részesülhetett az euritmia-előadás élményében. Társaságunk turnét szervezett a Hannoveri Euritmaiskola végzős diákjainak és tanárainak, műsorukat több Waldorf iskolában is megtekinthették az érdeklődők. A székhelyünkön kisebb euritmia előadásokra és koncertekre került sor neves művészek közreműködésével.</p>
+
+            <p>A budapesti és külföldi előadások nagyszámú közönsége átélhette az euritmia művészetét színházi előadások keretében. A Waldorf iskolákban történt előadások által segítünk a gyerekeknek komolyzenét, mozgásművészetet, irodalmat értő felnőtté válni.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="contact-info">
+            <p>
+                <a href="https://maps.app.goo.gl/WHZmazv6TJ6UAhqd9" target="_blank" rel="noopener noreferrer" class="address-link">
+                    1065 Budapest, Nagymező u. 30, 1. em. 1 aj.
+                </a>
+            </p>
+            <p><a href="tel:+3613122730" class="phone-link">+36-1-3122730</a></p>
+            <p><a href="mailto:huneuritmia@gmail.com" class="email-link">huneuritmia@gmail.com</a></p>
+            
+            <div class="social-icons">
+                <a href="https://www.instagram.com/huneuritmia/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="social-icon">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function setActiveButton(page) {
+            const staticButtons = document.querySelectorAll('.static-nav .nav-button');
+            const stickyButtons = document.querySelectorAll('.sticky-nav .nav-button');
+
+            staticButtons.forEach(btn => btn.classList.remove('active'));
+            stickyButtons.forEach(btn => btn.classList.remove('active'));
+
+            staticButtons.forEach(btn => {
+                if (btn.dataset.page === page) btn.classList.add('active');
+            });
+            stickyButtons.forEach(btn => {
+                if (btn.dataset.page === page) btn.classList.add('active');
+            });
+        }
+
+        setActiveButton('onepercent');
+
+        const staticHeader = document.getElementById('staticHeader');
+        const stickyNav = document.getElementById('stickyNav');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 50) {
+                stickyNav.classList.add('visible');
+                staticHeader.style.opacity = '0';
+                staticHeader.style.pointerEvents = 'none';
+            } else {
+                stickyNav.classList.remove('visible');
+                staticHeader.style.opacity = '1';
+                staticHeader.style.pointerEvents = 'auto';
+            }
+        });
+
+        function scrollToTop() {
+        window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // sima görgetés (opcionális)
+        });
+        setActiveButton('onepercent'); // ha szükséges, frissítsd az aktív gombot
+        }
+    </script>
+</body>
+</html>
