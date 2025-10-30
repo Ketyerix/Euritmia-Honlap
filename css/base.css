@@ -17,9 +17,29 @@ body {
     background-attachment: scroll;
     background-size: auto; /* JavaScript fogja felülírni */
     min-height: 100vh;
+    font-size: 16px; /* Megakadályozza a zoomolást iOS-en */
+    -webkit-text-size-adjust: 100%; /* Szöveg méret automatikus beállítás */
 }
 
 .main-content {
     min-height: calc(100vh - 200px);
     position: relative;
+}
+
+/* Mobil nézet optimalizálás navigációhoz */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .main-content {
+        min-height: calc(100vh - 150px); /* Kisebb margó mobilra */
+    }
+}
+
+/* Extra kismobil nézet további finomhangolása */
+@media (max-width: 400px) {
+    body {
+        font-size: 15px;
+    }
 }
