@@ -11,14 +11,14 @@
     align-items: center;
     justify-content: center;
     gap: 15px;
-    flex-wrap: nowrap; /* Megakadályozza, hogy a logo és szöveg külön sorba kerüljön */
+    flex-wrap: nowrap;
 }
 
 .header-logo {
     width: 60px;
     height: auto;
     display: block;
-    flex-shrink: 0; /* Megakadályozza, hogy a logo összenyomódjon */
+    flex-shrink: 0;
 }
 
 .header-text {
@@ -27,7 +27,7 @@
     letter-spacing: 1px;
     color: #333;
     line-height: 1.2;
-    flex-shrink: 1; /* Engedi, hogy a szöveg igazodjon a helyhoz */
+    flex-shrink: 1;
 }
 
 .static-nav {
@@ -100,36 +100,14 @@
     justify-content: center;
 }
 
-/* Alternatív megoldás, ha a :has() selector nem támogatott */
 .single-nav-button {
     justify-content: center;
-}
-
-/* Extra: Biztosítjuk, hogy az 1% gomb tartalma látható legyen */
-.nav-button[data-page="onepercent"] {
-    /* Biztosítjuk, hogy a szöveg látható legyen */
-    overflow: visible;
-    white-space: nowrap;
 }
 
 /* ===== MOBIL OPTIMALIZÁLÁS ===== */
 
 /* Tablet nézet (1024px és kisebb) */
 @media (max-width: 1024px) {
-    .nav-button[data-page="onepercent"] {
-        width: auto;
-        height: auto;
-        padding: 12px 20px;
-        border-radius: 30px;
-        min-width: 110px;
-        font-size: 16px;
-    }
-
-    .nav-button[data-page="onepercent"]::before {
-        content: none; /* Eltávolítjuk a ::before tartalmat */
-    }
-    
-    /* Általános gomb méretek tabletre */
     .nav-button {
         padding: 12px 20px;
         min-width: 110px;
@@ -144,20 +122,6 @@
 
 /* Mobil nézet (768px és kisebb) */
 @media (max-width: 768px) {
-    .nav-button[data-page="onepercent"] {
-        width: auto;
-        height: auto;
-        padding: 10px 18px;
-        border-radius: 25px;
-        min-width: 100px;
-        font-size: 15px;
-    }
-
-    .nav-button[data-page="onepercent"]::before {
-        content: none;
-    }
-    
-    /* Logo és szöveg egymás mellett marad, de kisebbek */
     .header-content {
         gap: 10px;
         flex-wrap: nowrap;
@@ -172,22 +136,21 @@
         width: 50px;
     }
     
-    /* Gombok további optimalizálása mobilra */
     .nav-button {
         padding: 10px 18px;
         min-width: 100px;
         font-size: 15px;
-        flex: 1; /* Egyenletesen kitöltik a teret */
-        max-width: 120px; /* Maximum szélesség */
+        flex: 1;
+        max-width: 120px;
     }
     
     .static-nav, .sticky-nav {
         gap: 8px;
         padding: 10px 8px;
         display: flex;
-        justify-content: space-between; /* Egyenletes eloszlás */
+        justify-content: space-between;
         flex-wrap: nowrap;
-        overflow-x: auto; /* Ha nagyon szűk a hely, görgethető */
+        overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
     
@@ -199,35 +162,28 @@
 /* Kismobil nézet (480px és kisebb) - 1% GOMB KÖR ALAKÚ */
 @media (max-width: 480px) {
     .nav-button[data-page="onepercent"] {
-        width: 44px; /* Kör alakú - ugyanolyan magas mint a többi gomb */
-        height: 44px; /* Kör alakú - ugyanolyan magas mint a többi gomb */
+        width: 44px;
+        height: 44px;
         padding: 0;
         border-radius: 50%;
         min-width: auto;
         flex: 0 0 auto;
         font-size: 14px;
-    }
-
-    .nav-button[data-page="onepercent"]::before {
-        content: "1%";
-        font-size: 14px;
         font-weight: bold;
     }
     
-    /* A többi gomb stílusa */
     .nav-button:not([data-page="onepercent"]) {
         padding: 12px 16px;
         min-width: 90px;
         font-size: 14px;
         flex: 1;
         max-width: 110px;
-        height: 44px; /* Ugyanolyan magas mint az 1% gomb */
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
     
-    /* Logo és szöveg még kompaktabb */
     .header-content {
         gap: 8px;
     }
@@ -246,7 +202,6 @@
         align-items: center;
     }
     
-    /* Sticky nav extra kompakt mód */
     .sticky-nav {
         padding: 8px 6px;
     }
@@ -263,10 +218,6 @@
         height: 40px;
         font-size: 12px;
     }
-
-    .nav-button[data-page="onepercent"]::before {
-        font-size: 12px;
-    }
     
     .nav-button:not([data-page="onepercent"]) {
         padding: 10px 12px;
@@ -274,7 +225,7 @@
         font-size: 13px;
         flex: 1;
         max-width: 95px;
-        height: 40px; /* Ugyanolyan magas mint az 1% gomb */
+        height: 40px;
     }
     
     .static-nav, .sticky-nav {
@@ -282,7 +233,6 @@
         padding: 8px 4px;
     }
     
-    /* Logo és szöveg extra kompakt */
     .header-content {
         gap: 6px;
     }
@@ -303,10 +253,6 @@
         height: 38px;
         font-size: 11px;
     }
-
-    .nav-button[data-page="onepercent"]::before {
-        font-size: 11px;
-    }
     
     .nav-button:not([data-page="onepercent"]) {
         padding: 8px 10px;
@@ -314,7 +260,7 @@
         font-size: 12px;
         flex: 1;
         max-width: 85px;
-        height: 38px; /* Ugyanolyan magas mint az 1% gomb */
+        height: 38px;
     }
     
     .static-nav, .sticky-nav {
@@ -322,7 +268,6 @@
         padding: 6px 3px;
     }
     
-    /* Ezen a ponton már nem fér el a teljes szöveg, így rövidítenünk kell */
     .header-text {
         font-size: 13px;
     }
@@ -340,5 +285,52 @@
 @media (max-width: 400px) {
     .static-nav, .sticky-nav {
         padding: 8px 4px;
+    }
+}
+
+/* Általános stílusok */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100vh;
+}
+
+body {
+    background-image: url('../images/Hatter.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: auto;
+    min-height: 100vh;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+.main-content {
+    min-height: calc(100vh - 200px);
+    position: relative;
+}
+
+/* Mobil nézet optimalizálás navigációhoz */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .main-content {
+        min-height: calc(100vh - 150px);
+    }
+}
+
+/* Extra kismobil nézet további finomhangolása */
+@media (max-width: 400px) {
+    body {
+        font-size: 15px;
     }
 }
