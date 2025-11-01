@@ -10,7 +10,55 @@ document.addEventListener('DOMContentLoaded', function() {
     initModal();
 });
 
-// Karusszel inicializálása
+// === Cikkek dinamikus megjelenítése ===
+
+function updateArticlesLayout() {
+    const grid = document.getElementById('articlesGrid');
+    if (!grid) return;
+
+    // Számoljuk meg a látható teljes cikkeket (display: block)
+    const visibleFullArticles = Array.from(grid.querySelectorAll('.article-full')).filter(el => {
+        return window.getComputedStyle(el).display === 'block';
+    });
+
+    if (visibleFullArticles.length > 0) {
+        grid.classList.add('expanded');
+    } else {
+        grid.classList.remove('expanded');
+    }
+}
+
+// Globális függvények – a HTML onclick attribútumok számára
+window.showFullArticle = function(articleId) {
+    const fullArticle = document.getElementById(articleId);
+    if (!fullArticle) return;
+
+    const articleCard = fullArticle.previousElementSibling;
+    if (!articleCard) return;
+
+    articleCard.style.display = 'none';
+    fullArticle.style.display = 'block';
+
+    fullArticle.scrollIntoView({ behavior: 'smooth' });
+    updateArticlesLayout();
+};
+
+window.hideFullArticle = function(articleId) {
+    const fullArticle = document.getElementById(articleId);
+    if (!fullArticle) return;
+
+    const articleCard = fullArticle.previousElementSibling;
+    if (!articleCard) return;
+
+    fullArticle.style.display = 'none';
+    articleCard.style.display = 'block';
+
+    articleCard.scrollIntoView({ behavior: 'smooth' });
+    updateArticlesLayout();
+};
+
+// === Karusszel ===
+
 function initCarousel() {
     const items = document.querySelectorAll('.carousel-item');
     const dots = document.querySelectorAll('.dot');
@@ -42,7 +90,6 @@ function initCarousel() {
         showItem(currentIndex);
     }
 
-    // Eseménykezelők
     prevButton.addEventListener('click', prevItem);
     nextButton.addEventListener('click', nextItem);
 
@@ -52,7 +99,6 @@ function initCarousel() {
         });
     });
 
-    // Automatikus váltás
     function startAutoPlay() {
         carouselInterval = setInterval(nextItem, 4000);
     }
@@ -61,22 +107,19 @@ function initCarousel() {
         clearInterval(carouselInterval);
     }
 
-    // Auto-play indítása
     startAutoPlay();
 
-    // Auto-play szüneteltetése interakció esetén
     const carouselContainer = document.querySelector('.carousel-container');
     if (carouselContainer) {
         carouselContainer.addEventListener('mouseenter', stopAutoPlay);
         carouselContainer.addEventListener('mouseleave', startAutoPlay);
-        
-        // Touch események mobilon
-        carouselContainer.addEventListener('touchstart', stopAutoPlay);
-        carouselContainer.addEventListener('touchend', startAutoPlay);
+        carouselContainer.addEventListener('touchstart', stopAutoPlay, { passive: true });
+        carouselContainer.addEventListener('touchend', startAutoPlay, { passive: true });
     }
 }
 
-// Galéria inicializálása
+// === Galéria ===
+
 function initGallery() {
     const galleryContainer = document.querySelector('.gallery-container');
     const galleryWrapper = document.querySelector('.gallery-wrapper');
@@ -89,13 +132,11 @@ function initGallery() {
     const itemWidth = 250;
     const gap = 10;
 
-    // Számold ki, hány oszlop fér el a látható területen
     function getVisibleColumns() {
         const containerWidth = galleryContainer.clientWidth;
         return Math.floor(containerWidth / (itemWidth + gap));
     }
 
-    // Számold ki, hány oszlop van összesen
     function getTotalColumns() {
         return Math.ceil(galleryWrapper.scrollWidth / (itemWidth + gap));
     }
@@ -123,11 +164,9 @@ function initGallery() {
         }
     }
 
-    // Eseménykezelők
     galleryPrev.addEventListener('click', prevGallery);
     galleryNext.addEventListener('click', nextGallery);
 
-    // Resize esemény kezelése
     function updateGalleryOnResize() {
         const totalColumns = getTotalColumns();
         const visibleColumns = getVisibleColumns();
@@ -141,7 +180,6 @@ function initGallery() {
 
     window.addEventListener('resize', updateGalleryOnResize);
     
-    // Touch swipe támogatás mobilon
     let touchStartX = 0;
     let touchEndX = 0;
     
@@ -151,24 +189,21 @@ function initGallery() {
     
     galleryContainer.addEventListener('touchend', function(e) {
         touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
-    
-    function handleSwipe() {
         const swipeThreshold = 50;
         const diff = touchStartX - touchEndX;
         
         if (Math.abs(diff) > swipeThreshold) {
             if (diff > 0) {
-                nextGallery(); // Balra swipe - következő
+                nextGallery();
             } else {
-                prevGallery(); // Jobbra swipe - előző
+                prevGallery();
             }
         }
-    }
+    }, { passive: true });
 }
 
-// Modal inicializálása
+// === Modal ===
+
 function initModal() {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
@@ -181,28 +216,20 @@ function initModal() {
     let currentImageSet = [];
     let currentImageIndex = 0;
 
-    // Modal megnyitása
     function openModal(imageSrc, imageAlt, imageSet, imageIndex) {
-        if (!modal || !modalImg) return;
-        
         modal.style.display = 'flex';
         modalImg.src = imageSrc;
         modalImg.alt = imageAlt;
         currentImageSet = imageSet;
         currentImageIndex = imageIndex;
-        
-        // Testreszabás: ne engedje a görgetést modal nyitva
         document.body.style.overflow = 'hidden';
     }
 
-    // Modal bezárása
     function closeModal() {
-        if (!modal) return;
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
 
-    // Következő kép a modalban
     function nextModalImage() {
         if (currentImageSet.length === 0) return;
         currentImageIndex = (currentImageIndex + 1) % currentImageSet.length;
@@ -211,7 +238,6 @@ function initModal() {
         modalImg.alt = nextImage.alt;
     }
 
-    // Előző kép a modalban
     function prevModalImage() {
         if (currentImageSet.length === 0) return;
         currentImageIndex = (currentImageIndex - 1 + currentImageSet.length) % currentImageSet.length;
@@ -220,54 +246,35 @@ function initModal() {
         modalImg.alt = prevImage.alt;
     }
 
-    // Eseménykezelők
-    if (modalClose) {
-        modalClose.addEventListener('click', closeModal);
-    }
-    
-    if (modalPrev) {
-        modalPrev.addEventListener('click', prevModalImage);
-    }
-    
-    if (modalNext) {
-        modalNext.addEventListener('click', nextModalImage);
-    }
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalPrev) modalPrev.addEventListener('click', prevModalImage);
+    if (modalNext) modalNext.addEventListener('click', nextModalImage);
 
-    // Modal bezárása kívülre kattintva
     modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModal();
-        }
+        if (e.target === modal) closeModal();
     });
 
-    // ESC billentyűvel is bezárható
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.style.display === 'flex') {
             closeModal();
         }
-        // Balra/Jobbra nyilak a modal navigációhoz
         if (modal.style.display === 'flex') {
-            if (e.key === 'ArrowLeft') {
-                prevModalImage();
-            } else if (e.key === 'ArrowRight') {
-                nextModalImage();
-            }
+            if (e.key === 'ArrowLeft') prevModalImage();
+            else if (e.key === 'ArrowRight') nextModalImage();
         }
     });
 
-    // Karusszel képek eseménykezelői
     const carouselImages = document.querySelectorAll('.carousel-item img');
     carouselImages.forEach((img, index) => {
-        img.addEventListener('click', function() {
-            openModal(this.src, this.alt, Array.from(carouselImages), index);
+        img.addEventListener('click', () => {
+            openModal(img.src, img.alt, Array.from(carouselImages), index);
         });
     });
 
-    // Galéria képek eseménykezelői
     const galleryImages = document.querySelectorAll('.gallery-item');
     galleryImages.forEach((img, index) => {
-        img.addEventListener('click', function() {
-            openModal(this.src, this.alt, Array.from(galleryImages), index);
+        img.addEventListener('click', () => {
+            openModal(img.src, img.alt, Array.from(galleryImages), index);
         });
     });
 }

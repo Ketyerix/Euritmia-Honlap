@@ -13,12 +13,14 @@
     color: #333;
 }
 
+/* Cikkek listája – használat a cikkek.html oldalon */
 .articles-list {
     display: flex;
     flex-direction: column;
     gap: 60px;
 }
 
+/* Teljes cikk stílusa – mindkét oldalon használt */
 .article-full {
     background-color: #fafafa;
     padding: 30px;
@@ -115,7 +117,64 @@
     text-decoration: none;
 }
 
-/* Mobil nézet optimalizálás */
+/* === Kezdőlap cikkek – GRID alapállapot === */
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+/* Cikkkártya stílusa – kezdőlapon */
+.article-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.article-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.article-title {
+    margin: 0 0 12px;
+    font-size: 20px;
+    color: #333;
+}
+
+.article-excerpt {
+    margin: 0 0 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.read-more-button {
+    background: #f0f0f0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.read-more-button:hover {
+    background: #e0e0e0;
+}
+
+/* Kibontott cikk teljes szélességben, de a gridben maradva */
+.articles-grid .article-full[style*="display: block"] {
+    grid-column: 1 / -1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* === Mobil nézet optimalizálás === */
+
 @media (max-width: 768px) {
     .articles-content {
         padding: 0 15px;
@@ -150,6 +209,15 @@
     .article-body h4 {
         font-size: 16px;
     }
+
+    /* Kezdőlap grid mobilra */
+    .articles-grid {
+        gap: 30px;
+    }
+
+    .article-card {
+        padding: 16px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -163,5 +231,17 @@
     
     .article-full h2 {
         font-size: 20px;
+    }
+
+    .articles-grid {
+        gap: 25px;
+    }
+
+    .article-card {
+        padding: 14px;
+    }
+
+    .article-title {
+        font-size: 18px;
     }
 }
