@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galéria – Euritmia Mozgásművészeti Társaság</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/galleryFull.css">
+    
+</head>
+<body>
+    <!-- Static Header -->
+    <div class="static-header" id="staticHeader">
+        <div class="header-content">
+            <img src="images/euritmia-logo.png" alt="Euritmia Logo" class="header-logo">
+            <span class="header-text">MAGYAR EURITMIA – MOZGÁSMŰVÉSZETI TÁRSASÁG</span>
+        </div>
+        <nav class="static-nav">
+            <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
+            <button class="nav-button" data-page="programs" onclick="window.location.href='programok.html'">Programok</button>
+            <button class="nav-button" data-page="trainings" onclick="window.location.href='kepzesek.html'">Képzések</button>
+            <button class="nav-button" data-page="onepercent" onclick="window.location.href='egyszazalek.html'">1%</button>
+        </nav>
+    </div>
+
+    <!-- Sticky Nav -->
+    <nav class="sticky-nav" id="stickyNav">
+        <button class="nav-button" data-page="home" onclick="window.location.href='index.html'">Kezdőlap</button>
+        <button class="nav-button" data-page="programs" onclick="window.location.href='programok.html'">Programok</button>
+        <button class="nav-button" data-page="trainings" onclick="window.location.href='kepzesek.html'">Képzések</button>
+        <button class="nav-button" data-page="onepercent" onclick="window.location.href='egyszazalek.html'">1%</button>
+    </nav>
+
+    <!-- Galéria tartalom -->
+    <div class="main-content">
+        <div class="gallery-page">
+            <h1 class="gallery-title">Euritmia Galéria</h1>
+            
+            <p class="gallery-description">
+                Fedezze fel euritmia előadásaink és workshopjaink legszebb pillanatait. 
+                A képek bemutatják mozgásművészetünk gazdagságát és sokrétűségét.
+            </p>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- A képek forrásai a meglévő képek alapján vannak beállítva -->
+                <div class="gallery-item">
+                    <img src="images/100.jpg" alt="Euritmia előadás" data-index="0">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/136.jpg" alt="Euritmia előadás" data-index="1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/151.jpg" alt="Euritmia előadás" data-index="2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/163.jpg" alt="Euritmia előadás" data-index="3">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/173.jpg" alt="Euritmia előadás" data-index="4">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/alapozo.jpg" alt="Euritmia képzés" data-index="5">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/szilmarilok.jpg" alt="Euritmia képzés 2" data-index="6">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/EuritmiaUnnepe.jpg" alt="Euritmia Ünnepe plakát" data-index="7">
+                </div>
+                <!-- További képek... -->
+                <div class="gallery-item">
+                    <img src="images/100.jpg" alt="Euritmia előadás" data-index="8">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/136.jpg" alt="Euritmia előadás" data-index="9">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/151.jpg" alt="Euritmia előadás" data-index="10">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/163.jpg" alt="Euritmia előadás" data-index="11">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="contact-info">
+            <p>
+                <a href="https://maps.app.goo.gl/WHZmazv6TJ6UAhqd9" target="_blank" rel="noopener noreferrer" class="address-link">
+                    1065 Budapest, Nagymező u. 30, 1. em. 1 aj.
+                </a>
+            </p>
+            <p><a href="tel:+3613122730" class="phone-link">+36-1-3122730</a></p>
+            <p><a href="mailto:huneuritmia@gmail.com" class="email-link">huneuritmia@gmail.com</a></p>
+            
+            <div class="social-icons">
+                <a href="https://www.instagram.com/huneuritmia/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="social-icon">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal a nagyított képekhez -->
+    <div class="modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-image" id="modalImage" src="" alt="Nagyított kép">
+        <button class="modal-arrow modal-prev">&#10094;</button>
+        <button class="modal-arrow modal-next">&#10095;</button>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/galleryFull.js"></script>
+</body>
+</html>
